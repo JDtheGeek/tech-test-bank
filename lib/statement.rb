@@ -1,6 +1,6 @@
+# frozen_string_literal: true
 
 class Statement
-
   def print
     output =  "| date       |    credit |     debit |   balance |\n"
     output += "| :--------- | --------: | --------: | --------: |\n"
@@ -13,18 +13,17 @@ class Statement
     output += statement_line(Date.new(2012, 1, 10), 1000, 0, 1000)
 
     puts output
-    return output
+    output
   end
 
-private
+  private
 
   def statement_line(date, credit = 0, debit = 0, balance = 0)
-    date_string    = date.strftime("%d/%m/%Y")
-    credit_string  = credit  == 0 ? '       ' : ('%.2f' % credit)
-    debit_string   = debit   == 0 ? '      ' : ('%.2f' % debit)
-    balance_string = balance == 0 ? '       ' : ('%.2f' % balance)
+    date_string    = date.strftime('%d/%m/%Y')
+    credit_string  = credit.zero?  ? '       ' : ('%.2f' % credit)
+    debit_string   = debit.zero?   ? '      '  : ('%.2f' % debit)
+    balance_string = balance.zero? ? '       ' : ('%.2f' % balance)
 
     "| #{date_string} |   #{credit_string} |    #{debit_string} |   #{balance_string} |\n"
   end
-
 end
