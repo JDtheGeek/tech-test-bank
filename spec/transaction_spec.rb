@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rspec'
-require_relative '../transaction'
+require 'transaction'
 
 describe Transaction do
   it 'records the amount 100 when instantiated with a 100' do
