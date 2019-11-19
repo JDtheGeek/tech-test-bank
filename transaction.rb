@@ -5,11 +5,13 @@ class Transaction
 
   def initialize(amount:)
     @amount = amount
+    @
   end
 
+  private
   def transaction_type
-    return 'deposit' if amount > 0
-    return 'withdrawel' if amount < 0
+    return 'credit' if amount > 0
+    return 'debit' if amount < 0
   end
 
 end
