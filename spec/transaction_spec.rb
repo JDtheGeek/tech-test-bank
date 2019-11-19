@@ -22,4 +22,9 @@ describe Transaction do
     expect(deposit.amount).to eq -100
   end
 
+  it "records type 'deposit' when a postive amount is passed" do
+    transaction = Transaction.new(amount: 100)
+    expect(transaction.transaction_type).to eq 'deposit'
+  end
+
 end

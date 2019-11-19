@@ -7,4 +7,8 @@ class Transaction
     @amount = amount
   end
 
+  def transaction_type
+    'deposit'
+  end
+
 end
