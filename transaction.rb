@@ -8,7 +8,8 @@ class Transaction
   end
 
   def transaction_type
-    'deposit'
+    return 'deposit' if amount > 0
+    return 'withdrawel' if amount < 0
   end
 
 end
