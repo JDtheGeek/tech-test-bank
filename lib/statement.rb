@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 class Statement
+
+  def initialize(data)
+    @data = data
+  end
+
   def print
     output =  "| date       |    credit |     debit |   balance |\n"
     output += "| :--------- | --------: | --------: | --------: |\n"
