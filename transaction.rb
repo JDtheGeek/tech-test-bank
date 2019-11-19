@@ -1,17 +1,17 @@
 
 class Transaction
 
-  attr_reader :amount
+  attr_reader :amount, :transaction_type
 
   def initialize(amount:)
     @amount = amount
-    @
+    check_transaction_type
   end
 
   private
-  def transaction_type
-    return 'credit' if amount > 0
-    return 'debit' if amount < 0
+  def check_transaction_type
+    @transaction_type = 'credit' if amount > 0
+    @transaction_type = 'debit' if amount < 0
   end
 
 end
