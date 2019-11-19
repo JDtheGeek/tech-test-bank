@@ -1,10 +1,11 @@
-
+require 'date'
 class Transaction
 
-  attr_reader :amount, :transaction_type
+  attr_reader :amount, :transaction_type, :date
 
-  def initialize(amount:)
+  def initialize(amount:, date: Date.today)
     @amount = amount
+    @date = date
     check_transaction_type
   end
 
