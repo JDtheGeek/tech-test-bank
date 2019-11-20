@@ -19,10 +19,4 @@ describe Account do
     account.transaction(amount: 100)
     expect(account.balance).to eq 100
   end
-
-  it 'returns balance of 500 after deposit of 500' do
-    account = Account.new
-    account.transaction(amount: 500)
-    expect(account.balance).to eq 500
-  end
 end
