@@ -12,8 +12,10 @@ class Statement
     update_data
   end
 
+  private
+
   def update_data
-    @transactions.reverse_each do |transaction|
+    @transactions.each do |transaction|
       update_balance(transaction.credit, transaction.debit)
       @data << {
         date: transaction.date,
@@ -22,9 +24,8 @@ class Statement
         balance: @balance
       }
     end
+    @data.reverse!
   end
-
-  private
 
   def update_balance(credit, debit)
     @balance += credit

@@ -2,10 +2,12 @@ require 'date'
 
 class Display
 
+  HEADER = "date || credit || debit || balance \n"
+
   def self.print(statement)
-    output = default_header
+    output = HEADER
     output += build_statement(statement.data)
-    puts output
+    return output
   end
 
   private
@@ -23,18 +25,12 @@ class Display
     return output
   end
 
-  def self.default_header
-    output =  "| date       |     credit |      debit |    balance |\n"
-    output += "| :--------- | ---------: | ---------: | ---------: |\n"
-    return output
-  end
-
   def self.statement_line(date:, credit:, debit:, balance:)
     date_string    = format_date(date)
     credit_string = format_value(credit)
     debit_string = format_value(debit)
     balance_string = format_value(balance)
-    output = "| #{date_string} | #{credit_string} | #{debit_string} | #{balance_string} |\n"
+    output = "#{date_string} ||#{ credit_string }||#{ debit_string }||#{ balance_string}\n"
     return output
   end
 
@@ -43,8 +39,8 @@ class Display
   end
 
   def self.format_value(value)
-    return '          ' if value.zero?
+    return ' ' if value == 0
     string = format('%#.2f', value)
-    return string.rjust(10,' ')
+    string = " #{string} "
   end
 end
