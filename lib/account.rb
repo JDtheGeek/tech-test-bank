@@ -4,16 +4,23 @@ require 'date'
 require 'statement'
 require 'transaction'
 
+
 class Account
+  attr_reader :balance
+
   def initialize(opening_balance: 0)
     @balance = opening_balance
+    @transactions = []
   end
-
-  attr_reader :balance
 
   def transaction(amount: 0, date: Date.today)
     @balance += amount
+    new_transaction = Transaction.new(amount: amount, date: date)
+    @transactions << new_transaction
   end
 
-  def statement; end
+  def statement
+    new_statement = Statement.new(@transactions)
+    new_statement.print
+  end
 end

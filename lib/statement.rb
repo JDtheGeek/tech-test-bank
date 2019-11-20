@@ -1,34 +1,60 @@
 # frozen_string_literal: true
 
-class Statement
+require 'date'
 
-  def initialize(data)
-    @data = data
+class Statement
+  def initialize(transactions, starting_balance = 0)
+    @transactions = transactions
+    @balance = starting_balance
   end
 
   def print
-    output =  "| date       |    credit |     debit |   balance |\n"
-    output += "| :--------- | --------: | --------: | --------: |\n"
-    # output += '| 14/01/2012    |             |     500.00 |   2500.00 |'
-    # output += '| 13/01/2012    |     2000.00 |            |   3000.00 |'
-    # output += '| 10/01/2012    |     1000.00 |            |   1000.00 |'
+    output = default_header
+    @transactions.each do |transaction|
 
-    output += statement_line(Date.new(2012, 1, 14), 0, 500, 2500)
-    output += statement_line(Date.new(2012, 1, 13), 2000, 0, 3000)
-    output += statement_line(Date.new(2012, 1, 10), 1000, 0, 1000)
+      credit = transaction.amount if transaction.type == 'credit'
+      debit = transaction.amount if transaction.type == 'debit'
 
-    puts output
+      output += statement_line(transaction.date, credit, debit, @balance)
+      update_balance(credit, debit)
+    end
     output
   end
 
   private
 
-  def statement_line(date, credit = 0, debit = 0, balance = 0)
-    date_string    = date.strftime('%d/%m/%Y')
-    credit_string  = credit.zero?  ? '       ' : ('%.2f' % credit)
-    debit_string   = debit.zero?   ? '      '  : ('%.2f' % debit)
-    balance_string = balance.zero? ? '       ' : ('%.2f' % balance)
+  def update_balance(credit, debit)
+    credit = 0 if credit.nil?
+    debit = 0 if debit.nil?
+    @balance += credit
+    @balance -= debit
+  end
 
-    "| #{date_string} |   #{credit_string} |    #{debit_string} |   #{balance_string} |\n"
+  def default_header
+    output =  "| date       |     credit |      debit |    balance |\n"
+    output += "| :--------- | ---------: | ---------: | ---------: |\n"
+    return output
+  end
+
+  def statement_line(date, credit, debit, balance)
+    credit = 0 if credit.nil?
+    debit = 0 if debit.nil?
+
+    date_string    = format_date(date)
+    credit_string = format_value(credit)
+    debit_string = format_value(debit)
+    balance_string = format_value(balance)
+    output = "| #{date_string} | #{credit_string} | #{debit_string} | #{balance_string} |\n"
+    return output
+  end
+
+  def format_date(date)
+    return date.strftime('%d/%m/%Y')
+  end
+
+  def format_value(value)
+    return '          ' if value.zero?
+    string = format('%#.2f', value)
+    return string.rjust(10,' ')
   end
 end
