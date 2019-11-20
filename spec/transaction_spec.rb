@@ -5,33 +5,21 @@ require 'transaction'
 
 describe Transaction do
   it 'records the amount 100 when instantiated with a 100' do
-    deposit = Transaction.new(amount: 100)
-    expect(deposit.amount).to eq 100
+    transaction = Transaction.new(amount: 100)
+    expect(transaction.credit).to eq 100
+    expect(transaction.debit).to eq 0
   end
 
   it 'records the amount 200 when instantiated with a 200' do
-    deposit = Transaction.new(amount: 200)
-    expect(deposit.amount).to eq 200
+    transaction = Transaction.new(amount: 200)
+    expect(transaction.credit).to eq 200
+    expect(transaction.debit).to eq 0
   end
 
   it 'records the amount -100 when instantiated with a -100' do
-    deposit = Transaction.new(amount: -100)
-    expect(deposit.amount).to eq(-100)
-  end
-
-  it "records type 'credit' when a postive amount is passed" do
-    transaction = Transaction.new(amount: 100)
-    expect(transaction.type).to eq 'credit'
-  end
-
-  it "records type 'credit' when a postive amount is passed" do
-    transaction = Transaction.new(amount: 999)
-    expect(transaction.type).to eq 'credit'
-  end
-
-  it "records type 'debit' when a negative amount is passed" do
     transaction = Transaction.new(amount: -100)
-    expect(transaction.type).to eq 'debit'
+    expect(transaction.credit).to eq 0
+    expect(transaction.debit).to eq 100
   end
 
   it 'records the date of the transaction' do

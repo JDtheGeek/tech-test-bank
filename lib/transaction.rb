@@ -2,18 +2,21 @@
 
 require 'date'
 class Transaction
-  attr_reader :amount, :type, :date
+  attr_reader :date, :credit, :debit
 
   def initialize(amount:, date: Date.today)
-    @amount = amount
     @date = date
-    check_transaction_type
+    @credit = get_credit_value(amount)
+    @debit = get_debit_value(amount)
   end
 
   private
 
-  def check_transaction_type
-    @type = 'credit' if amount.positive?
-    @type = 'debit' if amount.negative?
+  def get_credit_value(amount)
+    amount.positive? ? amount : 0
+  end
+
+  def get_debit_value(amount)
+    amount.negative? ? amount * -1 : 0
   end
 end

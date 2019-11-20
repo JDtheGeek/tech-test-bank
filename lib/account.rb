@@ -3,6 +3,7 @@
 require 'date'
 require_relative './statement'
 require_relative './transaction'
+require_relative './display'
 
 
 class Account
@@ -13,14 +14,14 @@ class Account
     @transactions = []
   end
 
-  def transaction(amount: 0, date: Date.today)
+  def transaction(amount: , date: Date.today)
+    transaction = Transaction.new(amount: amount, date: date)
+    @transactions << transaction
     @balance += amount
-    new_transaction = Transaction.new(amount: amount, date: date)
-    @transactions << new_transaction
   end
 
   def statement
-    new_statement = Statement.new(@transactions)
-    new_statement.print
+    statement = Statement.new(@transactions)
+    Display.print(statement)
   end
 end
