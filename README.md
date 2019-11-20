@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/4ad17cb431cf4f36b9a1ba37df5bafb8)](https://www.codacy.com/manual/JDtheGeek/tech-test-bank?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=JDtheGeek/tech-test-bank&amp;utm_campaign=Badge_Grade)
 ## Specification
 
 ### Requirements
