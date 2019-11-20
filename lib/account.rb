@@ -5,7 +5,6 @@ require_relative './statement'
 require_relative './transaction'
 require_relative './display'
 
-
 class Account
   attr_reader :balance
 
@@ -14,7 +13,7 @@ class Account
     @transactions = []
   end
 
-  def transaction(amount: , date: Date.today)
+  def transaction(amount:, date: Date.today)
     transaction = Transaction.new(amount: amount, date: date)
     @transactions << transaction
     @balance += amount

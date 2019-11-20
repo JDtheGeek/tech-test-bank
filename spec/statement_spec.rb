@@ -4,31 +4,36 @@ require 'rspec'
 require 'statement'
 
 describe Statement do
-  let(:transaction1) {instance_double(
-    'Transaction',
-    date:   Date.new(2012, 1, 10),
-    credit: 1000,
-    debit: 0
-  )}
+  let(:transaction1) do
+    instance_double(
+      'Transaction',
+      date: Date.new(2012, 1, 10),
+      credit: 1000,
+      debit: 0
+    )
+  end
 
-  let(:transaction2) {instance_double(
-    'Transaction',
-    date:   Date.new(2012, 1, 13),
-    credit: 2000,
-    debit: 0
-  )}
+  let(:transaction2) do
+    instance_double(
+      'Transaction',
+      date: Date.new(2012, 1, 13),
+      credit: 2000,
+      debit: 0
+    )
+  end
 
-  let(:transaction3) {instance_double(
-    'Transaction',
-    date:   Date.new(2012, 1, 14),
-    credit: 0,
-    debit: 500
-  )}
+  let(:transaction3) do
+    instance_double(
+      'Transaction',
+      date: Date.new(2012, 1, 14),
+      credit: 0,
+      debit: 500
+    )
+  end
 
-  let(:statement) {
-    transactions = [transaction1, transaction2, transaction3]
-    statement = Statement.new(transactions)
-  }
+  let(:statement) do
+    Statement.new([transaction1, transaction2, transaction3])
+  end
 
   let(:record1) { statement.data[0] } # first line
   let(:record2) { statement.data[1] } # second line
@@ -56,11 +61,10 @@ describe Statement do
   end
 
   context 'List of all transactions' do
-
     it 'appear in reverse order' do
-      expect(record1[:date]).to eq(Date.new(2012,1,14))
-      expect(record2[:date]).to eq(Date.new(2012,1,13))
-      expect(record3[:date]).to eq(Date.new(2012,1,10))
+      expect(record1[:date]).to eq(Date.new(2012, 1, 14))
+      expect(record2[:date]).to eq(Date.new(2012, 1, 13))
+      expect(record3[:date]).to eq(Date.new(2012, 1, 10))
     end
 
     it 'displays a rolling balance' do

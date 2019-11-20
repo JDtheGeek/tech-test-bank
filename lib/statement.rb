@@ -31,5 +31,4 @@ class Statement
     @balance += credit
     @balance -= debit
   end
-
 end
