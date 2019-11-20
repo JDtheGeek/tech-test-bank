@@ -11,14 +11,13 @@ class Statement
   def print
     output = default_header
     @transactions.each do |transaction|
-
       credit = transaction.amount if transaction.type == 'credit'
       debit = transaction.amount if transaction.type == 'debit'
-
-      output += statement_line(transaction.date, credit, debit, @balance)
       update_balance(credit, debit)
+      output += statement_line(transaction.date, credit, debit, @balance)
     end
-    output
+     puts output
+     return output
   end
 
   private

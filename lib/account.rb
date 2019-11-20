@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require 'date'
-require 'statement'
-require 'transaction'
+require_relative './statement'
+require_relative './transaction'
 
 
 class Account
